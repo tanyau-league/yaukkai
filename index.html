@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>Yaukkai</title>
+		<link rel="stylesheet" href="css/index.css">
+		<script src="https://kit.fontawesome.com/353dd169e9.js" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<ol>
+			<li>
+				<div id='mainpage'>
+					<div class="header">
+						<h1>Yaukkai</h1>
+						<button>选手名设定</button>
+					</div>
+					<div class="rounds">
+						<ul>
+							<li>
+								<div class="title"><p>东一局 0本场</p><span>0供托</span></div>
+							</li>
+							<li>
+								<div class="title"><p>东一局 1本场</p><span>1供托</span></div>
+							</li>
+							<li>
+								<div class="title"><p>东二局 0本场</p><span>0供托</span></div>
+							</li>
+							<li>
+								<div class="title"><p>东三局 0本场</p><span>0供托</span></div>
+							</li>
+							<li>
+								<div class="title"><p>东四局 0本场</p><span>0供托</span></div>
+							</li>
+							<li>
+								<div class="title"><p>东四局 1本场</p><span>0供托</span></div>
+							</li>
+							<li>
+								<div class="title"><p>东四局 2本场</p><span>0供托</span></div>
+							</li>
+						</ul>
+					</div>
+					<div class="selround">
+						<p>东x局 y本场</p>
+						<button class="setting"><i class="fa-solid fa-gear"></i></button>
+						<button class="addup"><i class="fa-solid fa-arrow-up"></i><i class="fa-solid fa-plus"></i></button>
+						<button class="adddown"><i class="fa-solid fa-arrow-down"></i><i class="fa-solid fa-plus"></i></button>
+						<button class="delete"><i class="fa-solid fa-trash"></i></button>
+					</div>
+					<div class="log">
+						<p>* 对局信息检查成立。</p>
+					</div>
+					<div class="score">
+						<ul>
+							<li>
+								<span class="name">选手A</span>
+								<span class="tenn">250,00</span>
+								<span class="pt">+0.0</span>
+								<span class="rank">1位</span>
+							</li>
+							<li>
+								<span class="name">选手B</span>
+								<span class="tenn">250,00</span>
+								<span class="pt">+0.0</span>
+								<span class="rank">1位</span>
+							</li>
+							<li>
+								<span class="name">选手C</span>
+								<span class="tenn">250,00</span>
+								<span class="pt">+0.0</span>
+								<span class="rank">1位</span>
+							</li>
+							<li>
+								<span class="name">选手D</span>
+								<span class="tenn">250,00</span>
+								<span class="pt">+0.0</span>
+								<span class="rank">1位</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</li>
+		</ol>
+	</body>
+	<script type="text/javascript">
+		window.onload = function() {
+			document.addEventListener('touchstart', function(event) {
+				if (event.touches.length > 1) {
+					event.preventDefault();
+				}
+			});
+			var lastTouchEnd = 0;
+			document.addEventListener('touchend', function(event) {
+				var now = (new Date()).getTime();
+				if (now - lastTouchEnd <= 300) {
+					event.preventDefault();
+				}
+				lastTouchEnd = now;
+			}, false);
+			document.addEventListener('gesturestart', function(event) {
+				event.preventDefault();
+			});
+		}
+	</script>
+</html>
