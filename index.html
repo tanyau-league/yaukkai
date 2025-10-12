@@ -8,43 +8,36 @@
 		<script src="https://kit.fontawesome.com/353dd169e9.js" crossorigin="anonymous"></script>
 	</head>
 	<body>
+		<div class="kuroi"></div>
+		<div class="popup">
+			<p class="cancel">取消</p>
+			<h1>标题</h1>
+			<ul>
+			</ul>
+			<p class="submit">提交</p>
+		</div>
 		<ol>
 			<li>
 				<div id='mainpage'>
 					<div class="header">
 						<h1>Yaukkai</h1>
-						<button>选手名设定</button>
+						<button class="rename">选手名设定</button>
 					</div>
 					<div class="rounds">
 						<ul>
-							<li>
+							<!-- <li>
 								<div class="title"><p>东一局 0本场</p><span>0供托</span></div>
-							</li>
-							<li>
-								<div class="title"><p>东一局 1本场</p><span>1供托</span></div>
-							</li>
-							<li>
-								<div class="title"><p>东二局 0本场</p><span>0供托</span></div>
-							</li>
-							<li>
-								<div class="title"><p>东三局 0本场</p><span>0供托</span></div>
-							</li>
-							<li>
-								<div class="title"><p>东四局 0本场</p><span>0供托</span></div>
-							</li>
-							<li>
-								<div class="title"><p>东四局 1本场</p><span>0供托</span></div>
-							</li>
-							<li>
-								<div class="title"><p>东四局 2本场</p><span>0供托</span></div>
-							</li>
+								<div class="enter"><i class="fa-solid fa-bars"></i></div>
+							</li> -->
 						</ul>
 					</div>
 					<div class="selround">
-						<p>东x局 y本场</p>
+						<p class="itt">东x局 y本场</p>
 						<button class="setting"><i class="fa-solid fa-gear"></i></button>
-						<button class="addup"><i class="fa-solid fa-arrow-up"></i><i class="fa-solid fa-plus"></i></button>
-						<button class="adddown"><i class="fa-solid fa-arrow-down"></i><i class="fa-solid fa-plus"></i></button>
+						<button class="addup"><i class="fa-solid fa-arrow-up"></i><i
+								class="fa-solid fa-plus"></i></button>
+						<button class="adddown"><i class="fa-solid fa-arrow-down"></i><i
+								class="fa-solid fa-plus"></i></button>
 						<button class="delete"><i class="fa-solid fa-trash"></i></button>
 					</div>
 					<div class="log">
@@ -80,8 +73,46 @@
 					</div>
 				</div>
 			</li>
+			<li>
+				<div id="rnd">
+					<div class="header">
+						<h1>Yaukkai</h1>
+					</div>
+					<div class="datas">
+						<h1>
+							<button><i class="fa-solid fa-arrow-left"></i></button><span>东x局y本场</span> - 对局记录
+						</h1>
+
+						<ul>
+							<li>
+								<div class="num">
+									<p class="title">荣和</p>
+									<p class="detail">1+1000,2-1000</p>
+								</div>
+								<div class="fix"><i class="fa-solid fa-gear"></i></div>
+								<div class="del"><i class="fa-solid fa-trash"></i></div>
+							</li>
+						</ul>
+					</div>
+					<div class="op">
+						<div class="del"><i class="fa-solid fa-trash"></i>删除上一条数据</div>
+						<div class="next_round">下一局</div><br>
+						<div class="add_tsumo tsumo">自摸</div>
+						<div class="add_ron ron">荣和</div>
+						<div class="add_reach reach">立直</div>
+						<div class="add_agari_kyoutaku agari_kyoutaku">和牌供托</div>
+						<div class="add_howannpai_ryuukyoku howannpai_ryuukyoku">荒牌流局</div>
+						<div class="add_chuuto_ryuukyoku chuuto_ryuukyoku">途中流局</div>
+						<div class="add_ryuumann ryuumann">流局满贯</div>
+
+					</div>
+				</div>
+			</li>
 		</ol>
 	</body>
+	<script src="js/popup.js"></script>
+	<script src="js/index.js"></script>
+	<script src="js/select_round.js"></script>
 	<script type="text/javascript">
 		window.onload = function() {
 			document.addEventListener('touchstart', function(event) {

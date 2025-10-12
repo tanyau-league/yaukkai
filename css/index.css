@@ -3,6 +3,7 @@
 	padding: 0;
 	font-size: 2vh;
 	border-radius: 0.5vh;
+	transition: all 0.25s;
 }
 body>ol{
 	list-style: none;
@@ -44,16 +45,40 @@ body>ol{
 	margin-left: 2vh;
 	margin-top: 2vh;
 }
+#mainpage .rounds ul li.selected div{
+	background: #464;
+}
+#mainpage .rounds ul li.selected div p{
+	color: #fff;
+}
+#mainpage .rounds ul li.selected div span{
+	color: #ddd;
+}
+#mainpage .rounds ul li.selected div i{
+	color: #fff;
+}
 #mainpage .rounds li{
-	margin-bottom: 1vh;
+	height: 7vh;
 	position: relative;
 }
 #mainpage .rounds li div.title{
 	height: 4vh;
-	width: calc(90vw - 4vh);
+	width: calc(76vw - 4vh);
 	background-color: #fff;
 	padding: 1vh;
 	border-left: #6f8b74 solid 1vh;
+	float: left;
+}
+#mainpage .rounds li div.enter{
+	height: 4vh;
+	width: calc(20vw - 4vh);
+	background-color: #fff;
+	padding: 1vh;
+	display: inline-block;
+	float: left;
+	margin-left: 1vh;
+	text-align: center;
+	line-height: 4vh;
 }
 #mainpage .rounds li div.title p{
 	font-size: 2.5vh;
@@ -65,20 +90,6 @@ body>ol{
 	color: #666;
 	font-size: 2vh;
 	margin-left: 1vh;
-}
-#mainpage .rounds li div.del{
-	height: 10vh;
-	width: 14vw;
-	background: #d33;
-	position: absolute;
-	top: 0;
-	right: 4vw;
-	z-index: -1;
-}
-#mainpage .rounds li div.del i{
-	color: #fff;
-	line-height: 10vh;
-	margin-left: 4.5vw;
 }
 #mainpage .selround{
 	width: 100vw;
@@ -98,6 +109,7 @@ body>ol{
 	border: 0;
 	background: #fff;
 }
+
 #mainpage .selround button.setting{
 	color: #464;
 	padding: 1vh 2.5vh;
@@ -118,6 +130,9 @@ body>ol{
 	padding: 0 2vh;
 	border-bottom: 1px #444 solid;
 	color: #464;
+}
+#mainpage .log p.err{
+	color: #d04d1a;
 }
 #mainpage .score{
 	padding: 2vh;
@@ -149,4 +164,184 @@ body>ol{
 	margin-right: 0;
 	color: #fff;
 	font-weight: bold;
+}
+.kuroi{
+	z-index: 10;
+	background: #00000099;
+	height: 100vh;
+	width: 100vw;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.popup{
+	z-index: 11;
+	background: #fff;
+	height: auto;
+	width: 80vw;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	place-items: center;
+}
+.popup>p{
+	font-size: 2.5vh;
+	padding: 1vh 2vh;
+	border: 0;
+	color: #fff;
+	margin: 2vh 0;
+}
+.popup>p.cancel{
+	background: #469;
+}
+.popup>p.submit{
+	background: #464;
+}
+.popup h1{
+	font-size: 3vh;
+	text-align: center;
+}
+.popup ul
+{
+	list-style: square;
+}
+.popup ul li{
+	width: 60vw;
+	margin-top: 1vh;
+}
+.popup ul li p{
+	font-size: 2.5vh;
+}
+.popup ul li input{
+	font-size: 2.5vh;
+	line-height: 3.5vh;
+	padding: 0 1vh;
+	width: 55vw;
+}
+.popup p.submit.danger{
+	background: #b22;
+}
+
+
+
+#rnd>div{
+	border-radius: 0;
+}
+#rnd .header{
+	width: 100vw;
+	height: 5vh;
+	background: #464;
+	border-radius:  0 0 0.5vh 0.5vh;
+}
+#rnd .header h1{
+	color: #fff;
+	font-size: 2.5vh;
+	line-height: 5vh;
+	margin-left: 2vh;
+	display: inline;
+}
+#rnd .datas{
+	width: calc(100vw - 4vh);
+	padding: 2vh;
+	background: #eee;
+	height: 60vh;
+}
+#rnd .datas h1,span{
+	font-size: 3.5vh;
+	margin-bottom: 2vh;
+	line-height: 4vh;
+}
+#rnd .datas h1 button{
+	font-size: 3.5vh;
+	height: 4vh;
+	border: none;
+	line-height: 4vh;
+	width: 4vh;
+	background: #464;
+	color: #fff;
+	margin-right: 2vh;
+}
+#rnd .datas h1 button i{
+	font-size: 2vh;
+	line-height: 4vh;
+	text-align: center;
+}
+#rnd .datas ul{
+	list-style: none;
+}
+#rnd .datas ul li .num{
+	width: calc(70vw - 6vh);
+	float: left;
+	background: #fff;
+	border: 1px #ddd solid;
+	margin-bottom: 1vh;
+}
+#rnd .datas ul li .num .title{
+	color: #fff;
+	background: #464;
+	padding: 1vh;
+	font-weight: bold;
+}
+#rnd .datas ul li .num .detail{
+	padding: 1vh;
+}
+#rnd .datas ul li .fix,#rnd .datas ul li .del{
+	width: calc(15vw - 4vh);
+	padding: 1vh;
+	float: left;
+	
+	border: 1px #ddd solid;
+	background: #fff;
+	text-align: center;
+}
+#rnd .datas ul li .fix{
+	margin: 0 2vh;
+	color: #464;
+}
+#rnd .datas ul li .del{
+	color: #b22;
+}
+#rnd .op{
+	width: calc(100vw - 4vh);
+	margin: 2vh;
+}
+#rnd .op div{
+	padding: 1vh 3vh;
+	font-size: 2vh;
+	background: #eee;
+	display: inline-block;
+	margin-bottom: 1vh;
+	margin-right: 1vh;
+}
+.tsumo{
+	background: #c24 !important;
+	color: #fff !important;
+}
+.ron{
+	background: #cc3610 !important;
+	color: #fff !important;
+}
+.reach{
+	background: #d68a10 !important;
+	color: #fff !important;
+}
+.agari_kyoutaku{
+	background: #718758 !important;
+	color: #fff !important;
+}
+.howannpai_ryuukyoku{
+	background: #4d5e9e !important;
+	color: #fff !important;
+}
+.chuuto_ryuukyoku{
+	background: #64889e !important;
+	color: #fff !important;
+}
+.ryuumann{
+	background: #83459e !important;
+	color: #fff !important;
+}
+#rnd .op .del{
+	color: #b22;
 }
