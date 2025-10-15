@@ -14,6 +14,85 @@
 			<h1>标题</h1>
 			<ul>
 			</ul>
+			<input type="checkbox" class="auto_next" name="auto_next" checked />
+			<label for="auto_next" class="auto_next">自动进入下一局</label>
+			<p class="submit">提交</p>
+
+		</div>
+		<div class="tennsu">
+			<p class="cancel">取消</p>
+			<h1>自摸/荣和记录添加</h1>
+			<p class="agaricha">自摸/荣和家</p>
+			<div class="agaricha"><button>1</button>
+				<button>2</button>
+				<button>3</button>
+				<button>4</button>
+			</div>
+			<p class="houchuucha">放铳家</p>
+			<div class="houchuucha"><button>1</button>
+				<button>2</button>
+				<button>3</button>
+				<button>4</button>
+			</div>
+			<p>番数</p>
+			<div class="fan"><button class="chisa">1番</button>
+				<button class="chisa">2番</button>
+				<button class="chisa">3番</button>
+				<button class="chisa">4番</button>
+				<button>5番（满贯）</button>
+				<button>6,7番（跳满）</button>
+				<button>8,9,10番（倍满）</button>
+				<button>11,12番（三倍满）</button>
+				<button>13番（役满）</button>
+				<button>两倍役满</button>
+				<button>三倍役满</button>
+				<button>四倍役满</button>
+				<button>五倍役满</button>
+				<button>六倍役满</button>
+			</div>
+			<p>符数</p>
+			<div class="fu"><button>20</button>
+				<button>25</button>
+				<button>30</button>
+				<button>40</button>
+				<button>50</button>
+				<button>60</button>
+				<button>70</button>
+				<button>80</button>
+				<button>90</button>
+				<button>100</button>
+				<button>110</button>
+			</div>
+			<p class="temu">点数 x本场</p>
+			<h2 class="big_temu"></h2>
+			<input type="checkbox" id="auto_kyoutaku" name="auto_kyoutaku" checked />
+			<label for="auto_kyoutaku">自动追加供托</label>
+			<input type="checkbox" id="auto_next" name="auto_next" checked />
+			<label for="auto_next">自动进入下一局</label>
+			<p class="submit">提交</p>
+		</div>
+		<div class="hitori">
+			<p class="cancel">取消</p>
+			<h1>立直/流局满贯记录添加</h1>
+			<p class="aite">立直/流局满贯家</p>
+			<div class="aite"><button>1</button>
+				<button>2</button>
+				<button>3</button>
+				<button>4</button>
+			</div>
+			<p class="submit">提交</p>
+		</div>
+		<div class="howann">
+			<p class="cancel">取消</p>
+			<h1>荒牌流局记录添加</h1>
+			<p class="cha">选择听牌家</p>
+			<div class="cha"><button>1</button>
+				<button>2</button>
+				<button>3</button>
+				<button>4</button>
+			</div>
+			<input type="checkbox" id="auto_next" name="auto_next" checked />
+			<label for="auto_next">自动进入下一局</label>
 			<p class="submit">提交</p>
 		</div>
 		<ol>
@@ -95,7 +174,6 @@
 						</ul>
 					</div>
 					<div class="op">
-						<div class="del"><i class="fa-solid fa-trash"></i>删除上一条数据</div>
 						<div class="next_round">下一局</div><br>
 						<div class="add_tsumo tsumo">自摸</div>
 						<div class="add_ron ron">荣和</div>
@@ -113,6 +191,9 @@
 	<script src="js/popup.js"></script>
 	<script src="js/index.js"></script>
 	<script src="js/select_round.js"></script>
+	<script src="js/agari.js"></script>
+	<script src="js/reach.js"></script>
+	<script src="js/howann.js"></script>
 	<script type="text/javascript">
 		window.onload = function() {
 			document.addEventListener('touchstart', function(event) {
