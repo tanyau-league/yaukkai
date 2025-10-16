@@ -156,7 +156,7 @@
 						<button class="loadin">导入外部数据</button>
 						<button class="download">本地下载数据</button>
 						<button class="upload">上传数据到云端系统</button>
-						<button class="upload">帮助</button>
+						<button class="helping">帮助</button>
 					</div>
 				</div>
 			</li>
@@ -205,6 +205,70 @@
 					</div>
 				</div>
 			</li>
+			<li class="help">
+				<div class="heading"><p><i class="fa-solid fa-arrow-left"></i></p><h1>Yaukkai 帮助</h1></div>
+				<ul>
+					<li>
+						<div>
+							<h2>默认规则</h2>
+							<ul>
+								<li>TanyauLeague 规则。</li>
+								<li>无西入，默认无切上满贯，pt 计算依照 m-league 算法。</li>
+								<li>切上满贯可以直接选择满贯，系统不记录具体的番符。</li>
+								<li>在进入下一局以及供托自动分配的默认选项中，默认一局只有一人和牌（头跳）。如果由于多人和牌导致的供托和连庄问题，请手动修正。</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<div>
+							<h2>局的操作</h2>
+							<ul>
+								<li>注意页面右上角可以设置选手名。</li>
+								<li>每次刷新时自动有东一局0本场。</li>
+								<li><b>选择某一局（变成绿色）</b>之后，可以在中间操作栏手动修改局目，本场，供托，在本局之前/之后添加一局，删除本局。</li>
+								<li>点击每一局右侧的按钮进入该局详细信息的设定。</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<div>
+							<h2>每局记录的操作</h2>
+							<ul>
+								<li>进入详细信息页面之后，下面的按钮可以在最后添加记录。每一条记录右侧可以手动修正和删除。</li>
+								<li>自摸和荣和：选择和牌家，放铳家，番符之后自动生成点数，点击确认完成添加</li>
+								<li>立直，和牌供托，途中流局，流局满贯是简单的选项和填空。</li>
+								<li>注意荒牌流局可以<b>多选</b>。</li>
+								<li><b>配备了自动下一局和自动供托分配机能。</b>一般建议打开。</li>
+								<li>信息的最下方有本局操作完成后的点数，供检查。</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<div>
+							<h2>数据相关</h2>
+							<ul>
+								<li>主页面显示当前选手的分数，pt，顺位。最下面有几个数据相关的按钮：</li>
+								<li>【手动存档】点击后立即存档。只有一个存档位，存档位置伴随浏览器，不会因刷新丢失。</li>
+								<li>【从存档恢复】从上述存档恢复记录。</li>
+								<li>【导入外部数据】导入要求格式的数据即可在本系统查看具体对局记录。</li>
+								<li>【本地下载数据】保存本局数据并下载为文件。</li>
+								<li>【上传数据到云端系统】和 tanyau-league 官网的数据联动，需要提供正确的 token.</li>
+							</ul>
+						</div>
+					</li>
+					<li>
+						<div>
+							<h2>开发者提示、联系方式</h2>
+							<ul>
+								<li>本项目隶属于联盟 <a href="https://tanyau-league.github.io/" target="_blank">TanyauLeague</a>. </li>
+								<li>开发者是 haraki. 微信 harakiseki.</li>
+								<li>本项目基于原生 js 开发，比较笨拙，主要灵活的一点有利用 popup+callback 操作.</li>
+								<li>如果遇到任何问题或者有任何建议，请截图或尝试复现，微信反馈，非常感谢！</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</li>
 		</ol>
 	</body>
 	<script src="js/popup.js"></script>
@@ -216,6 +280,7 @@
 	<script src="js/howann.js"></script>
 	<script src="js/add_round.js"></script>
 	<script src="js/file.js"></script>
+	<script src="js/help.js"></script>
 	<script type="text/javascript">
 		window.onload = function() {
 			document.addEventListener('touchstart', function(event) {

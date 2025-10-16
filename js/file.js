@@ -7,12 +7,38 @@ document.querySelector('.file .fromautosave').addEventListener('click', () => {
 	popup("从 localStroage 恢复数据？<br><span>已保存的数据长度为" + new_data.logs.length + "<br>时间为" + todate(new_data.time) +
 		"</span>", [], () => {
 			data = new_data
+			for (let i = 0; i < 4; i++) {
+				player_name[i + 1] = data.logs[data.logs.length-1].player[i].name
+				document.querySelectorAll('#mainpage .score ul li span.name')[i].innerHTML = player_name[i +
+					1]
+			}
 			wap(0)
 			exe()
 		}, danger = true)
 })
 document.querySelector('.file .download').addEventListener('click', () => {
 	downloadJSON("TanyauData" + data.time, data)
+})
+document.querySelector('.file .helping').addEventListener('click', () => {
+	wap(2)
+})
+document.querySelector('.file .loadin').addEventListener('click', () => {
+	let new_data=prompt('输入数据：')
+	if(new_data===null)return;
+	try{
+		new_data = JSON.parse(new_data)
+		data = new_data
+		for (let i = 0; i < 4; i++) {
+			player_name[i + 1] = data.logs[data.logs.length-1].player[i].name
+			document.querySelectorAll('#mainpage .score ul li span.name')[i].innerHTML = player_name[i +
+				1]
+		}
+		wap(0)
+		exe()
+	}catch(e){
+		alert(e)
+	}
+	
 })
 // 处理毫秒时间戳
 function todate(ms) {

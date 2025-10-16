@@ -783,3 +783,57 @@ button.chisa {
 .ranking_4 {
 	background: #435354 !important;
 }
+.help ul{
+	list-style:none;
+}
+.help .heading{
+	background: #464;
+	color:#fff;
+	padding: 4vh 2vh;
+}
+.help h1{
+	display: inline-block;
+	font-size: 4vh;
+	line-height: 4vh;
+}
+.help p{
+	background: #fff;
+	color: #464;
+	border: 0;
+	line-height: 4vh;
+	height: 4vh;
+	width: 4vh;
+	text-align: center;
+	margin-right: 2vh;
+	display: inline-block;
+	translate: 0 -12%;
+	cursor: pointer;
+}
+.help>ul{
+	padding: 2vh;
+	background: #eee;
+}
+.help>ul>li{
+	background: #fff;
+	
+	margin-bottom: 1vh;
+	border: 1px #ddd solid;
+}
+.help>ul>li h2{
+	font-size: 2.5vh;
+	padding: 2vh;
+	cursor: pointer;
+}
+.help>ul>li ul{
+	padding: 0 2vh 2vh 2vh;
+}
+.help ul li ul li{
+	margin-bottom: 0.5vh;
+}
+#mainpage .rounds li div{
+	cursor: pointer;
+}
+#rnd .datas ul div.fix,
+#rnd .datas ul div.del{
+	cursor: pointer;
+}
