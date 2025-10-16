@@ -627,15 +627,20 @@ document.querySelector("#rnd .op .add_howannpai_ryuukyoku").addEventListener('cl
 		}
 
 		if (document.querySelector('.howann input').checked) {
+			let taku = te.kyoutaku;
+			for (let i = ima_round_gid + 1; i < data.logs.length; i++) {
+				if (data.logs[i].type == 'round') break;
+				if (data.logs[i].type == 'reach') taku++;
+			}
 			if (tpd[oya_n]) {
-				return add_round_after(ima_round_gid, te.round, te.honnba + 1, 0)
+				return add_round_after(ima_round_gid, te.round, te.honnba + 1, taku)
 			} else {
 				if (te.round == 8) {
 					wap(0)
 					exe()
 					return ima_round_gid;
 				} else {
-					return add_round_after(ima_round_gid, te.round + 1, te.honnba + 1, 0)
+					return add_round_after(ima_round_gid, te.round + 1, te.honnba + 1, taku)
 				}
 			}
 		}
