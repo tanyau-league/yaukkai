@@ -123,7 +123,7 @@ function exe() {
 		document.querySelectorAll('#mainpage .score .pt')[i - 1].innerHTML = pt_det(rank_res[i].pt)
 		document.querySelectorAll('#mainpage .score .rank')[i - 1].innerHTML = rank_res[i].rank + "位"
 		for (let j = 1; j <= 4; j++) {
-			document.querySelectorAll('#mainpage .score .rank')[i - 1].classList.remove("ranking_" + i)
+			document.querySelectorAll('#mainpage .score .rank')[i - 1].classList.remove("ranking_" + j)
 		}
 		document.querySelectorAll('#mainpage .score .rank')[i - 1].classList.add("ranking_" + rank_res[i].rank)
 		data.logs[data.logs.length - 1].player[i - 1] = {
@@ -654,6 +654,7 @@ function pt_det(pt) {
 }
 
 function tennsu_det(tennsu) {
-	//15000->150,00
-	return parseInt(tennsu / 100) + ',' + '00'
+	//15000->15,000
+	let tes=Math.abs(tennsu)
+	return (tennsu<0?"-":"")+(parseInt(tes / 1000) + ',' + (tes%1000).toString().padStart(3,'0'))
 }
