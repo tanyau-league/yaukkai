@@ -26,7 +26,7 @@ function tsumo(round_gid, rnd, honnba, callback) {
 	})
 	document.querySelector(".tennsu p.temu").innerHTML = '点数  ' + honnba + '本场'
 	document.querySelector(".tennsu h2.big_temu").innerHTML = ''
-
+	document.querySelector('.tennsu h1').innerHTML = '自摸记录添加'
 	for (let i = 0; i < 4; i++) {
 		document.querySelectorAll('.tennsu .agaricha button')[i].innerHTML =
 			player_name[i + 1] + (oya_n == i + 1 ? '（亲）' : "")
@@ -55,7 +55,7 @@ function ron(round_gid, rnd, honnba, callback) {
 	})
 	document.querySelector(".tennsu p.temu").innerHTML = '点数  ' + honnba + '本场'
 	document.querySelector(".tennsu h2.big_temu").innerHTML = ''
-
+	document.querySelector('.tennsu h1').innerHTML = '荣和记录添加'
 	for (let i = 0; i < 4; i++) {
 		document.querySelectorAll('.tennsu .agaricha button')[i].innerHTML =
 			player_name[i + 1] + (oya_n == i + 1 ? '（亲）' : "")
@@ -108,10 +108,10 @@ document.querySelector('.tennsu .cancel').addEventListener('click', () => {
 })
 document.querySelector('.tennsu .submit').addEventListener('click', () => {
 	if (res[1] == 'none') return;
-	aga_callback(res, selected_agari_cha + 1, selected_houchuu_cha + 1,
+	let c_gid = aga_callback(res, selected_agari_cha + 1, selected_houchuu_cha + 1,
 		document.querySelector('#auto_kyoutaku').checked,
 		document.querySelector('#auto_next').checked)
-	detailed(aga_round_gid)
+	detailed(c_gid)
 	document.querySelector('.tennsu').style.display = 'none'
 	document.querySelector('.kuroi').style.display = 'none'
 })
@@ -143,19 +143,16 @@ const fud = {
 
 function tscalc() {
 	if (
-		(aga_type=='tsumo' && 
+		(aga_type == 'tsumo' &&
 			(
-				(selected_agari_cha != -1 && selected_fan != -1 && selected_fu != -1) 
-				||
+				(selected_agari_cha != -1 && selected_fan != -1 && selected_fu != -1) ||
 				(selected_agari_cha != -1 && selected_fan >= 4)
 			)
-		)
-		||
-		(aga_type=='ron' && 
+		) ||
+		(aga_type == 'ron' &&
 			(
-				(selected_agari_cha != -1 && selected_houchuu_cha != -1 &&selected_fan != -1 && selected_fu != -1) 
-				||
-				(selected_agari_cha != -1 && selected_houchuu_cha != -1 &&selected_fan >= 4)
+				(selected_agari_cha != -1 && selected_houchuu_cha != -1 && selected_fan != -1 && selected_fu != -1) ||
+				(selected_agari_cha != -1 && selected_houchuu_cha != -1 && selected_fan >= 4)
 			)
 		)
 	) {

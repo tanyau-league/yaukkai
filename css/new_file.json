@@ -1,0 +1,360 @@
+{
+    "time": 1760598614768,
+    "logs": [
+        {
+            "type": "round",
+            "round": 1,
+            "honnba": 0,
+            "kyoutaku": 0
+        },
+        {
+            "type": "reach",
+            "player": 4
+        },
+        {
+            "type": "ron",
+            "score": {
+                "1": -1000,
+                "2": 1000,
+                "3": 0,
+                "4": 0
+            }
+        },
+        {
+            "type": "agari_kyoutaku",
+            "player": 2,
+            "score": 1000
+        },
+        {
+            "type": "round",
+            "round": 2,
+            "honnba": 0,
+            "kyoutaku": 0
+        },
+        {
+            "type": "reach",
+            "player": 2
+        },
+        {
+            "type": "tsumo",
+            "score": {
+                "1": -6000,
+                "2": 18000,
+                "3": -6000,
+                "4": -6000
+            }
+        },
+        {
+            "type": "agari_kyoutaku",
+            "player": 2,
+            "score": 1000
+        },
+        {
+            "type": "round",
+            "round": 2,
+            "honnba": 1,
+            "kyoutaku": 0
+        },
+        {
+            "type": "reach",
+            "player": 4
+        },
+        {
+            "type": "ron",
+            "score": {
+                "1": -8300,
+                "2": 0,
+                "3": 0,
+                "4": 8300
+            }
+        },
+        {
+            "type": "agari_kyoutaku",
+            "player": 4,
+            "score": 1000
+        },
+        {
+            "type": "round",
+            "round": 3,
+            "honnba": 0,
+            "kyoutaku": 0
+        },
+        {
+            "type": "reach",
+            "player": 3
+        },
+        {
+            "type": "ron",
+            "score": {
+                "1": 0,
+                "2": -7700,
+                "3": 7700,
+                "4": 0
+            }
+        },
+        {
+            "type": "agari_kyoutaku",
+            "player": 3,
+            "score": 1000
+        },
+        {
+            "type": "round",
+            "round": 3,
+            "honnba": 1,
+            "kyoutaku": 0
+        },
+        {
+            "type": "reach",
+            "player": 3
+        },
+        {
+            "type": "ron",
+            "score": {
+                "1": 0,
+                "2": 0,
+                "3": 12300,
+                "4": -12300
+            }
+        },
+        {
+            "type": "agari_kyoutaku",
+            "player": 3,
+            "score": 1000
+        },
+        {
+            "type": "round",
+            "round": 3,
+            "honnba": 2,
+            "kyoutaku": 0
+        },
+        {
+            "type": "reach",
+            "player": 1
+        },
+        {
+            "type": "ron",
+            "score": {
+                "1": 2600,
+                "2": -2600,
+                "3": 0,
+                "4": 0
+            }
+        },
+        {
+            "type": "agari_kyoutaku",
+            "player": 1,
+            "score": 1000
+        },
+        {
+            "type": "round",
+            "round": 4,
+            "honnba": 0,
+            "kyoutaku": 0
+        },
+        {
+            "type": "ron",
+            "score": {
+                "1": 0,
+                "2": -5800,
+                "3": 0,
+                "4": 5800
+            }
+        },
+        {
+            "type": "round",
+            "round": 4,
+            "honnba": 1,
+            "kyoutaku": 0
+        },
+        {
+            "type": "reach",
+            "player": 4
+        },
+        {
+            "type": "reach",
+            "player": 3
+        },
+        {
+            "type": "ron",
+            "score": {
+                "1": 0,
+                "2": 0,
+                "3": -4200,
+                "4": 4200
+            }
+        },
+        {
+            "type": "agari_kyoutaku",
+            "player": 4,
+            "score": 2000
+        },
+        {
+            "type": "round",
+            "round": 4,
+            "honnba": 2,
+            "kyoutaku": 0
+        },
+        {
+            "type": "reach",
+            "player": 3
+        },
+        {
+            "type": "reach",
+            "player": 2
+        },
+        {
+            "type": "ron",
+            "score": {
+                "1": 0,
+                "2": -7000,
+                "3": 7000,
+                "4": 0
+            }
+        },
+        {
+            "type": "agari_kyoutaku",
+            "player": 3,
+            "score": 2000
+        },
+        {
+            "type": "round",
+            "round": 5,
+            "honnba": 0,
+            "kyoutaku": 0
+        },
+        {
+            "type": "ron",
+            "score": {
+                "1": 2900,
+                "2": -2900,
+                "3": 0,
+                "4": 0
+            }
+        },
+        {
+            "type": "round",
+            "round": 5,
+            "honnba": 1,
+            "kyoutaku": 0
+        },
+        {
+            "type": "reach",
+            "player": 1
+        },
+        {
+            "type": "ron",
+            "score": {
+                "1": -1600,
+                "2": 0,
+                "3": 0,
+                "4": 1600
+            }
+        },
+        {
+            "type": "agari_kyoutaku",
+            "player": 4,
+            "score": 1000
+        },
+        {
+            "type": "round",
+            "round": 6,
+            "honnba": 0,
+            "kyoutaku": 0
+        },
+        {
+            "type": "tsumo",
+            "score": {
+                "1": -1000,
+                "2": -2000,
+                "3": -1000,
+                "4": 4000
+            }
+        },
+        {
+            "type": "round",
+            "round": 7,
+            "honnba": 0,
+            "kyoutaku": 0
+        },
+        {
+            "type": "howannpai_ryuukyoku",
+            "score": {
+                "1": -1000,
+                "2": -1000,
+                "3": -1000,
+                "4": 3000
+            }
+        },
+        {
+            "type": "round",
+            "round": 8,
+            "honnba": 1,
+            "kyoutaku": 0
+        },
+        {
+            "type": "reach",
+            "player": 4
+        },
+        {
+            "type": "reach",
+            "player": 1
+        },
+        {
+            "type": "reach",
+            "player": 2
+        },
+        {
+            "type": "ron",
+            "score": {
+                "1": 4200,
+                "2": 0,
+                "3": 0,
+                "4": -4200
+            }
+        },
+        {
+            "type": "agari_kyoutaku",
+            "player": 1,
+            "score": 3000
+        },
+        {
+            "type": "round",
+            "round": 9,
+            "honnba": 0,
+            "kyoutaku": 0
+        },
+        {
+            "type": "player_info",
+            "player": [
+                {
+                    "id": 1,
+                    "name": "AA",
+                    "score": 30700,
+                    "rank": 1,
+                    "point": 507
+                },
+                {
+                    "id": 2,
+                    "name": "BB",
+                    "score": 25100,
+                    "rank": 3,
+                    "point": -149
+                },
+                {
+                    "id": 3,
+                    "name": "CC",
+                    "score": 14800,
+                    "rank": 4,
+                    "point": -452
+                },
+                {
+                    "id": 4,
+                    "name": "DD",
+                    "score": 29400,
+                    "rank": 2,
+                    "point": 94
+                }
+            ]
+        }
+    ]
+}

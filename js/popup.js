@@ -9,7 +9,7 @@ function popup(title, arr, callback, danger = false, tochuu = false) {
 	current_arr = arr
 	current_tochuu = tochuu
 	document.querySelector('.popup h1').innerHTML = title
-	document.querySelector(".popup ul").innerHTML=''
+	document.querySelector(".popup ul").innerHTML = ''
 	arr.forEach(x => {
 		let li = document.createElement('li')
 		li.innerHTML = `<p>${x.text}</p><input type="text" ` + (x.value == '未命名' ? 'placeholder' : 'value') +
@@ -49,6 +49,6 @@ document.querySelector('.popup .submit').addEventListener('click', () => {
 	document.querySelector(".popup ul").innerHTML = ''
 	document.querySelector('.kuroi').style.display = 'none'
 	document.querySelector('.popup').style.display = 'none'
-	if(current_tochuu) current_callback(true, current_arr,document.querySelector(".popup input").checked)
+	if (current_tochuu) current_callback(true, current_arr, document.querySelector(".popup input").checked)
 	else current_callback(true, current_arr)
 })

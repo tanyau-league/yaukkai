@@ -150,6 +150,13 @@
 							</li>
 						</ul>
 					</div>
+					<div class="file">
+						<button class="autosave">手动存档</button>
+						<button class="fromautosave">从存档恢复</button>
+						<button class="loadin">导入外部数据</button>
+						<button class="download">本地下载数据</button>
+						<button class="upload">上传数据到云端系统</button>
+					</div>
 				</div>
 			</li>
 			<li>
@@ -172,9 +179,11 @@
 								<div class="del"><i class="fa-solid fa-trash"></i></div>
 							</li>
 						</ul>
+
 					</div>
 					<div class="op">
-						<div class="next_round">下一局</div><br>
+						<div class="prev_round"><i class="fa-solid fa-arrow-left"></i>上一局</div>
+						<div class="next_round">下一局<i class="fa-solid fa-arrow-right"></i></div><br>
 						<div class="add_tsumo tsumo">自摸</div>
 						<div class="add_ron ron">荣和</div>
 						<div class="add_reach reach">立直</div>
@@ -184,16 +193,28 @@
 						<div class="add_ryuumann ryuumann">流局满贯</div>
 
 					</div>
+					<div class="temp_score">
+						<p>本局后点数情况</p>
+						<ol>
+							<li>AA 25000</li>
+							<li>AA 25000</li>
+							<li>AA 25000</li>
+							<li>AA 25000</li>
+						</ol>
+					</div>
 				</div>
 			</li>
 		</ol>
 	</body>
 	<script src="js/popup.js"></script>
+	<script src="js/score.js"></script>
 	<script src="js/index.js"></script>
 	<script src="js/select_round.js"></script>
 	<script src="js/agari.js"></script>
 	<script src="js/reach.js"></script>
 	<script src="js/howann.js"></script>
+	<script src="js/add_round.js"></script>
+	<script src="js/file.js"></script>
 	<script type="text/javascript">
 		window.onload = function() {
 			document.addEventListener('touchstart', function(event) {

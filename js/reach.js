@@ -20,7 +20,7 @@ function reach(round_gid, callback) {
 	document.querySelector('.kuroi').style.display = 'block'
 }
 
-function ryuumann(round_gid, rnd,callback) {
+function ryuumann(round_gid, rnd, callback) {
 	hitori_round_gid = round_gid
 	hitori_callback = callback
 	selected_cha = -1

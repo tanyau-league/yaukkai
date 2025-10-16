@@ -15,51 +15,44 @@ data = {
 		"player": [{
 			"id": 1,
 			"name": "AA",
-			"score": 30700,
+			"score": 25000,
 			"rank": 1,
-			"point": 507
+			"point": 0
 		}, {
 			"id": 2,
 			"name": "BB",
-			"score": 25100,
-			"rank": 3,
-			"point": -149
+			"score": 25000,
+			"rank": 1,
+			"point": 0
 		}, {
 			"id": 3,
 			"name": "CC",
-			"score": 14800,
-			"rank": 4,
-			"point": -452
+			"score": 25000,
+			"rank": 1,
+			"point": 0
 		}, {
 			"id": 4,
 			"name": "DD",
-			"score": 29400,
-			"rank": 2,
-			"point": 94
+			"score": 25000,
+			"rank": 1,
+			"point": 0
 		}]
 	}]
 }
 
 player_name = ['', '未命名', '未命名', '未命名', '未命名']
+num_kanji = {
+	1: "一",
+	2: "二",
+	3: "三",
+	4: "四"
+}
 
 function round_kanji(n) {
 	let s = '东'
 	if (n >= 5) s = '南';
 	let p = (n - 1) % 4 + 1;
-	switch (p) {
-		case 1:
-			s += '一'
-			break
-		case 2:
-			s += '二'
-			break
-		case 3:
-			s += '三'
-			break
-		case 4:
-			s += '四'
-			break
-	}
+	if (p in num_kanji) s += num_kanji[p]
 	return s;
 }
 
@@ -88,6 +81,8 @@ function exe() {
 	if (!('logs' in data)) {
 		err('严重错误：data 不存在 logs')
 	}
+	data.time = Date.now()
+	document.querySelector('#mainpage .header h1').innerHTML = 'Yaukkai <span>' + data.time + '</span>'
 	document.querySelector('#mainpage .rounds>ul').innerHTML = ''
 	let round_num = 0
 	for (let i = 0; i < data.logs.length; i++) {
@@ -119,6 +114,27 @@ function exe() {
 	if (round_num > 0) {
 		document.querySelector('#mainpage .rounds ul li').click()
 	}
+	let ima_score = score_calc(0, data.logs.length)
+	for (let i = 1; i <= 4; i++) {
+		document.querySelectorAll('#mainpage .score .tenn')[i - 1].innerHTML = tennsu_det(ima_score[i])
+	}
+	let rank_res = rank()
+	for (let i = 1; i <= 4; i++) {
+		document.querySelectorAll('#mainpage .score .pt')[i - 1].innerHTML = pt_det(rank_res[i].pt)
+		document.querySelectorAll('#mainpage .score .rank')[i - 1].innerHTML = rank_res[i].rank + "位"
+		for (let j = 1; j <= 4; j++) {
+			document.querySelectorAll('#mainpage .score .rank')[i - 1].classList.remove("ranking_" + i)
+		}
+		document.querySelectorAll('#mainpage .score .rank')[i - 1].classList.add("ranking_" + rank_res[i].rank)
+		data.logs[data.logs.length - 1].player[i - 1] = {
+			"id": i,
+			"name": player_name[i],
+			"score": ima_score[i],
+			"rank": rank_res[i].rank,
+			"point": rank_res[i].pt
+		}
+	}
+
 }
 exe()
 document.querySelector('#mainpage .header .rename').addEventListener('click', () => {
@@ -141,6 +157,7 @@ document.querySelector('#mainpage .header .rename').addEventListener('click', ()
 			player_name[i + 1] = rec_temp[i].value
 			document.querySelectorAll('#mainpage .score ul li span.name')[i].innerHTML = player_name[i +
 				1]
+			data.logs[data.logs.length - 1].player[i].name = player_name[i + 1]
 		}
 	})
 	console.log(temp)
@@ -164,6 +181,19 @@ document.querySelector("#mainpage .selround .setting").addEventListener('click',
 		data.logs[selected_gid].kyoutaku = parseInt(rec_temp[2].value)
 		exe()
 	})
+})
+document.querySelector("#mainpage .selround .addup").addEventListener('click', () => {
+	add_round(selected_gid, selected_round, -1, -1)
+})
+document.querySelector("#mainpage .selround .adddown").addEventListener('click', () => {
+	let next_gid = 0;
+	for (let i = selected_gid + 1; i < data.logs.length; i++) {
+		if (data.logs[i].type == 'round') {
+			next_gid = i
+			break
+		}
+	}
+	add_round(next_gid, selected_round, -1, -1)
 })
 document.querySelector("#mainpage .selround .delete").addEventListener('click', () => {
 	popup(`删除本局<br/>${round_kanji(selected_round)}局 ${selected_honnba}本场<br/>! 不可恢复 !`, [], (signal,
@@ -189,11 +219,13 @@ function wap(n) {
 }
 wap(0)
 
+var ima_round_gid = 0,
+	append_x = 0;
+
 function detailed(round_gid) {
 	let te = data.logs[round_gid]
 	document.querySelector('#rnd .datas ul').innerHTML = ''
 	document.querySelector('#rnd .datas>h1 span').innerHTML = `${round_kanji(te.round)}局 ${te.honnba}本场`
-	let append_x;
 	for (let i = round_gid + 1; i < data.logs.length; i++) {
 		if (data.logs[i].type == 'round') {
 			append_x = i
@@ -305,12 +337,58 @@ function detailed(round_gid) {
 			}
 		})
 	}
-	document.querySelector('#rnd .datas h1 button').addEventListener('click', () => {
-		wap(0)
-		exe()
+	ima_round_gid = round_gid
+	let roundend_score = score_calc(1, append_x)
+	document.querySelectorAll('.temp_score li').forEach((x, n) => {
+		x.innerHTML = player_name[n + 1] + ' ' + tennsu_det(roundend_score[n + 1])
 	})
-	document.querySelector("#rnd .op .add_tsumo").addEventListener('click', () => {
-		tsumo(round_gid, te.round, te.honnba, (res, agari_cha, houchuu_cha, auto_kyoutaku, auto_next) => {
+	wap(1)
+}
+
+function score_det(dict) {
+	s = ''
+	for (let i = 1; i <= 4; i++) {
+		if (i.toString() in dict) {
+			s += player_name[i] + " "
+			if (dict[i] >= 0) s += "+" + dict[i]
+			else s += dict[i].toString()
+			s += ' '
+		}
+	}
+	return s
+}
+document.querySelector('#rnd .datas h1 button').addEventListener('click', () => {
+	wap(0)
+	exe()
+})
+document.querySelector('#rnd .op .prev_round').addEventListener('click', () => {
+	let prev_round_gid = -1;
+	for (let i = ima_round_gid - 1; i >= 0; i--) {
+		if (data.logs[i].type == 'round') {
+			prev_round_gid = i
+			break
+		}
+	}
+	if (prev_round_gid != -1) detailed(prev_round_gid)
+})
+document.querySelector('#rnd .op .next_round').addEventListener('click', () => {
+	let next_round_gid = -1;
+	for (let i = ima_round_gid + 1; i < data.logs.length; i++) {
+		if (data.logs[i].type == 'round') {
+			next_round_gid = i
+			break
+		}
+	}
+	if (next_round_gid != -1) {
+		if (data.logs[next_round_gid].round <= 8) {
+			detailed(next_round_gid)
+		}
+	}
+})
+document.querySelector("#rnd .op .add_tsumo").addEventListener('click', () => {
+	let te = data.logs[ima_round_gid]
+	tsumo(ima_round_gid, te.round, te.honnba,
+		(res, agari_cha, houchuu_cha, auto_kyoutaku, auto_next) => {
 			if (res[1] == 'tsumo') {
 				let oya_n = (te.round - 1) % 4 + 1
 				if (res[0]) {
@@ -341,173 +419,241 @@ function detailed(round_gid) {
 					})
 				}
 				//供托处理
-				if (auto_kyoutaku && te.kyoutaku != 0) {
-					data.logs.splice(append_x + 1, 0, {
-						"type": "agari_kyoutaku",
-						"player": agari_cha,
-						"score": 1000 * te.kyoutaku
-					})
-				}
-			}
-			/*else if(res[1]=='ron'){
-				if(res[0]){
-					//亲荣和
-				}else{
-					//子荣和
-				}
-			}*/
-		})
-	})
-	document.querySelector("#rnd .op .add_ron").addEventListener('click', () => {
-		ron(round_gid, te.round, te.honnba, (res, agari_cha, houchuu_cha, auto_kyoutaku, auto_next) => {
-			if (res[1] == 'ron') {
-				let oya_n = (te.round - 1) % 4 + 1
-				data.logs.splice(append_x, 0, {
-					"type": "ron",
-					"score": {
-						"1": (1 == agari_cha ? res[4] : (1 == houchuu_cha ? -res[4] : 0)),
-						"2": (2 == agari_cha ? res[4] : (2 == houchuu_cha ? -res[4] : 0)),
-						"3": (3 == agari_cha ? res[4] : (3 == houchuu_cha ? -res[4] : 0)),
-						"4": (4 == agari_cha ? res[4] : (4 == houchuu_cha ? -res[4] : 0))
+				if (auto_kyoutaku) {
+					let taku = te.kyoutaku;
+					for (let i = ima_round_gid + 1; i < data.logs.length; i++) {
+						if (data.logs[i].type == 'round') break;
+						if (data.logs[i].type == 'reach') taku++;
 					}
-				})
-				//供托处理
-				if (auto_kyoutaku && te.kyoutaku != 0) {
-					data.logs.splice(append_x + 1, 0, {
-						"type": "agari_kyoutaku",
-						"player": agari_cha,
-						"score": 1000 * te.kyoutaku
-					})
+					if (taku != 0) {
+						data.logs.splice(append_x + 1, 0, {
+							"type": "agari_kyoutaku",
+							"player": agari_cha,
+							"score": 1000 * taku
+						})
+					}
+
 				}
+				if (auto_next) {
+					if (res[0]) {
+						//亲自摸，连庄
+						return add_round_after(ima_round_gid, te.round, te.honnba + 1, 0)
+					} else {
+						//子自摸，下一庄/结束
+						if (te.round == 8) {
+							wap(0)
+							exe()
+							return ima_round_gid;
+						} else {
+							return add_round_after(ima_round_gid, te.round + 1, 0, 0)
+						}
+					}
+				} else return ima_round_gid
 			}
 		})
-	})
-	document.querySelector("#rnd .op .add_reach").addEventListener('click', () => {
-		reach(round_gid, (n) => {
-			data.logs.splice(append_x, 0, {
-				"type": "reach",
-				"player": n
-			})
-		})
-	})
-	document.querySelector("#rnd .op .add_ryuumann").addEventListener('click', () => {
-		ryuumann(round_gid, te.round, (n) => {
+})
+document.querySelector("#rnd .op .add_ron").addEventListener('click', () => {
+	let te = data.logs[ima_round_gid]
+	ron(ima_round_gid, te.round, te.honnba, (res, agari_cha, houchuu_cha, auto_kyoutaku, auto_next) => {
+		if (res[1] == 'ron') {
 			let oya_n = (te.round - 1) % 4 + 1
-			if (n == oya_n) {
-				data.logs.splice(append_x, 0, {
-					"type": "ryuumann",
-					"score": {
-						"1": (1 == n ? 12000 : -4000),
-						"2": (2 == n ? 12000 : -4000),
-						"3": (3 == n ? 12000 : -4000),
-						"4": (4 == n ? 12000 : -4000)
-					}
-				})
-			} else {
-				data.logs.splice(append_x, 0, {
-					"type": "ryuumann",
-					"score": {
-						"1": (1 == n ? 8000 : (1 == oya_n ? -4000 : -2000)),
-						"2": (2 == n ? 8000 : (2 == oya_n ? -4000 : -2000)),
-						"3": (3 == n ? 8000 : (3 == oya_n ? -4000 : -2000)),
-						"4": (4 == n ? 8000 : (4 == oya_n ? -4000 : -2000))
-					}
-				})
-			}
-
-		})
-	})
-	document.querySelector("#rnd .op .add_chuuto_ryuukyoku").addEventListener('click', () => {
-		popup("途中流局记录", [], (signal) => {
-			if (!signal) return;
 			data.logs.splice(append_x, 0, {
-				"type": "chuuto_ryuukyoku"
+				"type": "ron",
+				"score": {
+					"1": (1 == agari_cha ? res[4] : (1 == houchuu_cha ? -res[4] : 0)),
+					"2": (2 == agari_cha ? res[4] : (2 == houchuu_cha ? -res[4] : 0)),
+					"3": (3 == agari_cha ? res[4] : (3 == houchuu_cha ? -res[4] : 0)),
+					"4": (4 == agari_cha ? res[4] : (4 == houchuu_cha ? -res[4] : 0))
+				}
 			})
-			detailed(round_gid)
-		}, danger = false, tochuu = true)
-
-	})
-	document.querySelector("#rnd .op .add_agari_kyoutaku").addEventListener('click', () => {
-		let taku = te.kyoutaku;
-		for (let i = round_gid + 1; i < data.logs.length; i++) {
-			if (data.logs[i].type == 'round') break;
-			if (data.logs[i].type == 'reach') taku++;
+			//供托处理
+			if (auto_kyoutaku) {
+				let taku = te.kyoutaku;
+				for (let i = ima_round_gid + 1; i < data.logs.length; i++) {
+					if (data.logs[i].type == 'round') break;
+					if (data.logs[i].type == 'reach') taku++;
+				}
+				if (taku != 0) {
+					data.logs.splice(append_x + 1, 0, {
+						"type": "agari_kyoutaku",
+						"player": agari_cha,
+						"score": 1000 * taku
+					})
+				}
+			}
+			if (auto_next) {
+				if (res[0]) {
+					//亲荣和，连庄
+					return add_round_after(ima_round_gid, te.round, te.honnba + 1, 0)
+				} else {
+					//子荣和，下一庄/结束
+					if (te.round == 8) {
+						wap(0)
+						exe()
+						return ima_round_gid;
+					} else {
+						return add_round_after(ima_round_gid, te.round + 1, 0, 0)
+					}
+				}
+			} else return ima_round_gid
 		}
-		popup("和牌供托记录", [{
-			'text': '供托获得家（1~4）',
-			'value': 1
-		}, {
-			'text': '供托数量',
-			'value': taku
-		}], (signal, rec_temp) => {
-			if (!signal) return;
-			data.logs.splice(append_x, 0, {
-				"type": "agari_kyoutaku",
-				"player": parseInt(rec_temp[0].value),
-				"score": parseInt(rec_temp[1].value) * 1000
-			})
-			detailed(round_gid)
+	})
+})
+document.querySelector("#rnd .op .add_reach").addEventListener('click', () => {
+	reach(ima_round_gid, (n) => {
+		data.logs.splice(append_x, 0, {
+			"type": "reach",
+			"player": n
 		})
+	})
+})
+document.querySelector("#rnd .op .add_ryuumann").addEventListener('click', () => {
+	let te = data.logs[ima_round_gid]
+	ryuumann(ima_round_gid, te.round, (n) => {
+		let oya_n = (te.round - 1) % 4 + 1
+		if (n == oya_n) {
+			data.logs.splice(append_x, 0, {
+				"type": "ryuumann",
+				"score": {
+					"1": (1 == n ? 12000 : -4000),
+					"2": (2 == n ? 12000 : -4000),
+					"3": (3 == n ? 12000 : -4000),
+					"4": (4 == n ? 12000 : -4000)
+				}
+			})
+		} else {
+			data.logs.splice(append_x, 0, {
+				"type": "ryuumann",
+				"score": {
+					"1": (1 == n ? 8000 : (1 == oya_n ? -4000 : -2000)),
+					"2": (2 == n ? 8000 : (2 == oya_n ? -4000 : -2000)),
+					"3": (3 == n ? 8000 : (3 == oya_n ? -4000 : -2000)),
+					"4": (4 == n ? 8000 : (4 == oya_n ? -4000 : -2000))
+				}
+			})
+		}
 
 	})
-	document.querySelector("#rnd .op .add_howannpai_ryuukyoku").addEventListener('click', () => {
-		howann(round_gid, (tpd) => {
-			let tpd_cnt = tpd[1] + tpd[2] + tpd[3] + tpd[4]
-			if (tpd_cnt == 0 || tpd_cnt == 4) {
-				data.logs.splice(append_x, 0, {
-					"type": "howannpai_ryuukyoku",
-					"score": {
-						"1": 0,
-						"2": 0,
-						"3": 0,
-						"4": 0
-					}
-				})
-			}else if(tpd_cnt==1){
-				data.logs.splice(append_x, 0, {
-					"type": "howannpai_ryuukyoku",
-					"score": {
-						"1": tpd[1]?3000:-1000,
-						"2": tpd[2]?3000:-1000,
-						"3": tpd[3]?3000:-1000,
-						"4": tpd[4]?3000:-1000
-					}
-				})
-			}else if(tpd_cnt==2){
-				data.logs.splice(append_x, 0, {
-					"type": "howannpai_ryuukyoku",
-					"score": {
-						"1": tpd[1]?1500:-1500,
-						"2": tpd[2]?1500:-1500,
-						"3": tpd[3]?1500:-1500,
-						"4": tpd[4]?1500:-1500
-					}
-				})
-			}else if(tpd_cnt==3){
-				data.logs.splice(append_x, 0, {
-					"type": "howannpai_ryuukyoku",
-					"score": {
-						"1": tpd[1]?1000:-3000,
-						"2": tpd[2]?1000:-3000,
-						"3": tpd[3]?1000:-3000,
-						"4": tpd[4]?1000:-3000
-					}
-				})
-			}
+})
+document.querySelector("#rnd .op .add_chuuto_ryuukyoku").addEventListener('click', () => {
+	let te = data.logs[ima_round_gid]
+	popup("途中流局记录", [], (signal) => {
+		if (!signal) return;
+		data.logs.splice(append_x, 0, {
+			"type": "chuuto_ryuukyoku"
 		})
+		if (document.querySelector('.popup input.auto_next').checked) {
+			let taku = te.kyoutaku;
+			for (let i = ima_round_gid + 1; i < append_x; i++) {
+				if (data.logs[i].type == 'reach') taku++;
+			}
+			detailed(add_round_after(ima_round_gid, te.round, te.honnba + 1, taku))
+		} else {
+			detailed(ima_round_gid)
+		}
+
+	}, danger = false, tochuu = true)
+
+})
+document.querySelector("#rnd .op .add_agari_kyoutaku").addEventListener('click', () => {
+	let te = data.logs[ima_round_gid]
+	let taku = te.kyoutaku;
+	for (let i = ima_round_gid + 1; i < data.logs.length; i++) {
+		if (data.logs[i].type == 'round') break;
+		if (data.logs[i].type == 'reach') taku++;
+	}
+	popup("和牌供托记录", [{
+		'text': '供托获得家（1~4）',
+		'value': 1
+	}, {
+		'text': '供托数量',
+		'value': taku
+	}], (signal, rec_temp) => {
+		if (!signal) return;
+		data.logs.splice(append_x, 0, {
+			"type": "agari_kyoutaku",
+			"player": parseInt(rec_temp[0].value),
+			"score": parseInt(rec_temp[1].value) * 1000
+		})
+		detailed(ima_round_gid)
 	})
-	wap(1)
+
+})
+document.querySelector("#rnd .op .add_howannpai_ryuukyoku").addEventListener('click', () => {
+	let te = data.logs[ima_round_gid]
+	howann(ima_round_gid, (tpd) => {
+		let tpd_cnt = tpd[1] + tpd[2] + tpd[3] + tpd[4]
+		let oya_n = (te.round - 1) % 4 + 1
+		if (tpd_cnt == 0 || tpd_cnt == 4) {
+			data.logs.splice(append_x, 0, {
+				"type": "howannpai_ryuukyoku",
+				"score": {
+					"1": 0,
+					"2": 0,
+					"3": 0,
+					"4": 0
+				}
+			})
+		} else if (tpd_cnt == 1) {
+			data.logs.splice(append_x, 0, {
+				"type": "howannpai_ryuukyoku",
+				"score": {
+					"1": tpd[1] ? 3000 : -1000,
+					"2": tpd[2] ? 3000 : -1000,
+					"3": tpd[3] ? 3000 : -1000,
+					"4": tpd[4] ? 3000 : -1000
+				}
+			})
+		} else if (tpd_cnt == 2) {
+			data.logs.splice(append_x, 0, {
+				"type": "howannpai_ryuukyoku",
+				"score": {
+					"1": tpd[1] ? 1500 : -1500,
+					"2": tpd[2] ? 1500 : -1500,
+					"3": tpd[3] ? 1500 : -1500,
+					"4": tpd[4] ? 1500 : -1500
+				}
+			})
+		} else if (tpd_cnt == 3) {
+			data.logs.splice(append_x, 0, {
+				"type": "howannpai_ryuukyoku",
+				"score": {
+					"1": tpd[1] ? 1000 : -3000,
+					"2": tpd[2] ? 1000 : -3000,
+					"3": tpd[3] ? 1000 : -3000,
+					"4": tpd[4] ? 1000 : -3000
+				}
+			})
+		}
+
+		if (document.querySelector('.howann input').checked) {
+			if (tpd[oya_n]) {
+				return add_round_after(ima_round_gid, te.round, te.honnba + 1, 0)
+			} else {
+				if (te.round == 8) {
+					wap(0)
+					exe()
+					return ima_round_gid;
+				} else {
+					return add_round_after(ima_round_gid, te.round + 1, te.honnba + 1, 0)
+				}
+			}
+		}
+	})
+})
+
+function pt_det(pt) {
+	//150->+15.0
+	//-152->▲15.2
+	let prs = Math.abs(pt)
+	let s = (pt >= 0 ? "＋" : "▲")
+	let b = prs % 10
+	let a = parseInt(prs / 10)
+	s += a + '.' + b
+	return s
 }
 
-function score_det(dict) {
-	s = ''
-	for (let i = 1; i <= 4; i++) {
-		if (i.toString() in dict) {
-			s += player_name[i] + " "
-			if (dict[i] >= 0) s += "+" + dict[i]
-			else s += dict[i].toString()
-			s += ' '
-		}
-	}
-	return s
+function tennsu_det(tennsu) {
+	//15000->150,00
+	return parseInt(tennsu / 100) + ',' + '00'
 }

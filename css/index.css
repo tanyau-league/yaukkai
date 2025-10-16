@@ -4,6 +4,14 @@
 	font-size: 2vh;
 	border-radius: 0.5vh;
 	transition: all 0.25s;
+	-webkit-user-select: none;
+	/* 适用于Webkit浏览器 */
+	-moz-user-select: none;
+	/* 适用于Firefox */
+	-ms-user-select: none;
+	/* 适用于IE10+ */
+	user-select: none;
+	/* 标准语法 */
 }
 
 body>ol {
@@ -185,8 +193,8 @@ button {
 
 #mainpage .score ul li span.name {
 	display: inline-block;
-	width: 10vh;
-	max-width: 10vh;
+	width: 16vh;
+	max-width: 16vh;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -195,6 +203,15 @@ button {
 
 #mainpage .score ul li span.tenn {
 	font-size: 3vh;
+	display: inline-block;
+	width: 10vh;
+	max-width: 10vh;
+}
+
+#mainpage .score ul li span.pt {
+	display: inline-block;
+	width: 10vh;
+	max-width: 10vh;
 }
 
 #mainpage .score ul li span.rank {
@@ -205,7 +222,19 @@ button {
 	color: #fff;
 	font-weight: bold;
 }
-
+#mainpage .file{
+	width: calc(100vw - 4vh);
+	padding: 2vh;
+	background: #eee;
+}
+#mainpage .file button{
+	background-color: #fff;
+	border: 0;
+	padding: 1vh 2vh;
+	margin-bottom: 1vh;
+	margin-right: 1vh;
+	border: 1px solid #ddd;
+}
 .kuroi {
 	z-index: 10;
 	background: #00000099;
@@ -511,7 +540,7 @@ button.chisa {
 }
 
 #rnd .datas h1,
-span {
+#rnd .datas span {
 	font-size: 3.5vh;
 	margin-bottom: 2vh;
 	line-height: 4vh;
@@ -678,6 +707,7 @@ span {
 	padding: 1vh;
 	margin: 0.5vh 0;
 }
+
 .howann>p.submit {
 	font-size: 2.5vh;
 	padding: 1vh 2vh;
@@ -698,6 +728,58 @@ span {
 	background: #7caa37;
 	color: #fff;
 }
-.howann input{
+
+.howann input {
 	margin-left: 2vh;
+}
+
+#mainpage .header h1 span {
+	font-size: 1.5vh;
+	color: #ffffff33;
+}
+
+#rnd .op .prev_round,
+#rnd .op .next_round {
+	border: #ddd 1px solid;
+}
+
+#rnd .temp_score {
+	width: calc(100vw - 4vh);
+	padding: 2vh;
+	overflow-x: hidden;
+}
+
+#rnd .temp_score p {
+	font-size: 2.5vh;
+	line-height: 5vh;
+	border-left: #464 1vh solid;
+	padding-left: 2vh;
+}
+
+#rnd .temp_score ol {
+	list-style: none;
+	margin-left: 3vh;
+}
+
+#rnd .temp_score ol li {
+	font-size: 2vh;
+	line-height: 4vh;
+	float: left;
+	margin-right: 2vh;
+}
+
+.ranking_1 {
+	background: #e67416 !important;
+}
+
+.ranking_2 {
+	background: #e79e44 !important;
+}
+
+.ranking_3 {
+	background: #868b57 !important;
+}
+
+.ranking_4 {
+	background: #435354 !important;
 }
