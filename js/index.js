@@ -56,11 +56,6 @@ function round_kanji(n) {
 	return s;
 }
 
-function err(s) {
-	console.log(s)
-	document.querySelector("#mainpage .log p").innerHTML = s
-	document.querySelector("#mainpage .log p").classList.add('err')
-}
 
 var selected_round = 1,
 	selected_honnba = 0,
@@ -78,9 +73,6 @@ var stoch = {
 }
 
 function exe() {
-	if (!('logs' in data)) {
-		err('严重错误：data 不存在 logs')
-	}
 	data.time = Date.now()
 	document.querySelector('#mainpage .header h1').innerHTML = 'Yaukkai <span>' + data.time + '</span>'
 	document.querySelector('#mainpage .rounds>ul').innerHTML = ''

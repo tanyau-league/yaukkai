@@ -20,6 +20,7 @@ body>ol {
 
 button {
 	cursor: pointer;
+	color: #000;
 }
 
 .cancel,

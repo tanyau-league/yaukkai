@@ -1,11 +1,16 @@
 document.querySelector('.file .autosave').addEventListener('click', () => {
-	localStorage.setItem('yaukkai_archive', JSON.stringify(data))
-	alert("已经保存到 localStroage.")
+	popup("确认保存数据？",[],(signal)=>{
+		if (!signal) return
+		localStorage.setItem('yaukkai_archive', JSON.stringify(data))
+		alert("已经保存到 localStroage.")
+	})
+	
 })
 document.querySelector('.file .fromautosave').addEventListener('click', () => {
 	let new_data = JSON.parse(localStorage.getItem('yaukkai_archive'))
 	popup("从 localStroage 恢复数据？<br><span>已保存的数据长度为" + new_data.logs.length + "<br>时间为" + todate(new_data.time) +
-		"</span>", [], () => {
+		"</span>", [], (signal) => {
+			if (!signal) return
 			data = new_data
 			for (let i = 0; i < 4; i++) {
 				player_name[i + 1] = data.logs[data.logs.length-1].player[i].name
@@ -17,7 +22,7 @@ document.querySelector('.file .fromautosave').addEventListener('click', () => {
 		}, danger = true)
 })
 document.querySelector('.file .download').addEventListener('click', () => {
-	downloadJSON("TanyauData" + data.time, data)
+	downloadJSON("Yaukkai" + data.time, data)
 })
 document.querySelector('.file .helping').addEventListener('click', () => {
 	wap(2)
